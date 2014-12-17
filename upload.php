@@ -565,9 +565,11 @@ class Upload {
 	 * @return bool
 	 */
 	protected function create_destination() {
-
-		return mkdir($this->root . $this->destination, $this->default_permissions, true);
-
+		$file_name = $this->root . $this->destination;
+		if (!file_exists($file_name)) {
+			return mkdir($file_name, $this->default_permissions, true);
+		}
+		return true;
 	}
 
 
